@@ -42,20 +42,4 @@ public class BoardGame {
     @ElementCollection
     private List<String> artists;
 
-//    public BoardGame(String name, String priceUk, double pricePl, int publishedYear, int minPlayers, int maxPlayers, int minPlaytime, int maxPlaytime,
-//     int minAge, String playtime, String description, String commentary, String faq, String imageUrl, PrimaryPublisher publisher,
-//     PrimaryDesigner designer, ArrayList<String> artists) {
-//    }
-
-    public void setDescription(String description) {
-        this.description = Utils.removeHtmlCode(description);
-    }
-
-    public void setCommentary(String commentary) {
-        this.commentary = Utils.removeHtmlCode(commentary);
-    }
-
-    public void setFaq(String faq) {
-        this.faq = Utils.removeHtmlCode(faq);
-    }
 }

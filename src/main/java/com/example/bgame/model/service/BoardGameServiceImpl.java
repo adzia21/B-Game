@@ -1,5 +1,6 @@
 package com.example.bgame.model.service;
 
+import com.example.bgame.Utils;
 import com.example.bgame.model.exception.BoardGameNotFoundException;
 import com.example.bgame.model.external.Root;
 import com.example.bgame.model.internal.BoardGame;
@@ -109,9 +110,9 @@ public class BoardGameServiceImpl implements BoardGameService {
                 .maxPlaytime(game.getMax_playtime())
                 .playtime(game.getPlaytime())
                 .minAge(game.getMin_age())
-                .description(game.getDescription())
-                .commentary(game.getCommentary())
-                .faq(game.getFaq())
+                .description(Utils.removeHtmlCode(game.getDescription()))
+                .commentary(Utils.removeHtmlCode(game.getCommentary()))
+                .faq(Utils.removeHtmlCode(game.getFaq()))
                 .imageUrl(game.getImage_url())
                 .publisher(game.getPrimary_publisher().getName())
                 .designer(game.getPrimary_designer().getName())
