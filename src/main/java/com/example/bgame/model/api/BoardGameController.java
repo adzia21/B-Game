@@ -42,4 +42,10 @@ public class BoardGameController {
         boardGameService.updateBoardGame(boardGame, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/fromAPI")
+    public ResponseEntity<BoardGame> updateBoardGamesFromApi(){
+        boardGameService.saveIntoDbBoardGameFromAPI();
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

@@ -10,4 +10,5 @@ public interface BoardGameService {
     void deleteBoardGame(Long id);
     List<BoardGame> getBoardGames();
     void updateBoardGame(BoardGame boardGame, Long id);
+    List<BoardGame> saveIntoDbBoardGameFromAPI();
 }
