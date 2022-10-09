@@ -9,6 +9,5 @@ public interface BoardGameService {
     BoardGame saveBoardGame(BoardGame boardGame);
     void deleteBoardGame(Long id);
     List<BoardGame> getBoardGames();
-
-
+    void updateBoardGame(BoardGame boardGame, Long id);
 }

@@ -37,4 +37,9 @@ public class BoardGameController {
     public ResponseEntity<List<BoardGame>> getBoardGames(){
         return new ResponseEntity<>(boardGameService.getBoardGames(), HttpStatus.OK);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<BoardGame> updateBoardGame(@Valid @RequestBody BoardGame boardGame,@PathVariable Long id){
+        boardGameService.updateBoardGame(boardGame, id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

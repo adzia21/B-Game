@@ -36,6 +36,61 @@ public class BoardGameServiceImpl implements BoardGameService {
         return (List<BoardGame>) boardGameRepository.findAll();
     }
 
+    @Override
+    public void updateBoardGame(BoardGame boardGame, Long id) {
+        BoardGame boardGameFromDb = getBoardGame(id);
+        if(boardGame.getName() != null){
+            boardGameFromDb.setName(boardGame.getName());
+        }
+        if(boardGame.getPriceUk() != null){
+            boardGameFromDb.setPriceUk(boardGame.getPriceUk());
+        }
+        if(boardGame.getPricePl() != null){
+            boardGameFromDb.setPricePl(boardGame.getPricePl());
+        }
+        if(boardGame.getPublishedYear() != 0){
+            boardGameFromDb.setPublishedYear(boardGame.getPublishedYear());
+        }
+
+        if(boardGame.getMinPlayers() != 0){
+            boardGameFromDb.setMinPlayers(boardGame.getMinPlayers());
+        }
+        if(boardGame.getMaxPlayers() != 0){
+            boardGameFromDb.setMaxPlayers(boardGame.getMaxPlayers());
+        }
+        if(boardGame.getMinPlaytime() != 0){
+            boardGameFromDb.setMinPlaytime(boardGame.getMinPlaytime());
+        }
+        if(boardGame.getMaxPlaytime() != 0){
+            boardGameFromDb.setMaxPlaytime(boardGame.getMaxPlaytime());
+        }
+        if(boardGame.getPlaytime() != null){
+            boardGameFromDb.setPlaytime(boardGame.getPlaytime());
+        }
+        if(boardGame.getMinAge() != 0){
+            boardGameFromDb.setMinAge(boardGame.getMinAge());
+        }
+        if(boardGame.getDescription() != null){
+            boardGameFromDb.setDescription(boardGame.getDescription());
+        }
+        if(boardGame.getCommentary() != null){
+            boardGameFromDb.setCommentary(boardGame.getCommentary());
+        }
+        if(boardGame.getFaq() != null){
+            boardGameFromDb.setFaq(boardGame.getFaq());
+        }
+        if(boardGame.getImageUrl() != null){
+            boardGameFromDb.setImageUrl(boardGame.getImageUrl());
+        }
+        if(boardGame.getDesigner() != null){
+            boardGameFromDb.setDesigner(boardGame.getDesigner());
+        }
+        if(boardGame.getArtists() != null){
+            boardGameFromDb.setArtists(boardGame.getArtists());
+        }
+        boardGameRepository.save(boardGameFromDb);
+    }
+
     static BoardGame unwrapBoardGame(Optional<BoardGame> entity, Long id) {
         if (entity.isPresent()) return entity.get();
         else throw new BoardGameNotFoundException(id);
