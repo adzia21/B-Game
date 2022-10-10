@@ -30,11 +30,11 @@ public class BoardGame {
     private int maxPlaytime;
     private String playtime;
     private int minAge;
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String commentary;
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String faq;
     private String imageUrl;
     private String publisher;

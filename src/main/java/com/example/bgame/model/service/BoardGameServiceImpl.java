@@ -6,6 +6,10 @@ import com.example.bgame.model.external.Root;
 import com.example.bgame.model.internal.BoardGame;
 import com.example.bgame.model.repository.BoardGameRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,6 +29,12 @@ public class BoardGameServiceImpl implements BoardGameService {
     }
 
     @Override
+    public Page<BoardGame> getBoardGames(int page, int pageResultLimit) {
+        PageRequest pageRequest = PageRequest.of(page, pageResultLimit);
+        return boardGameRepository.findAll(pageRequest);
+    }
+
+    @Override
     public BoardGame saveBoardGame(BoardGame boardGame) {
         return boardGameRepository.save(boardGame);
     }
@@ -32,11 +42,6 @@ public class BoardGameServiceImpl implements BoardGameService {
     @Override
     public void deleteBoardGame(Long id) {
         boardGameRepository.deleteById(id);
-    }
-
-    @Override
-    public List<BoardGame> getBoardGames() {
-        return (List<BoardGame>) boardGameRepository.findAll();
     }
 
     @Override
@@ -95,7 +100,7 @@ public class BoardGameServiceImpl implements BoardGameService {
     }
 
     @Override
-    public List<BoardGame> saveIntoDbBoardGameFromAPI() {
+    public void saveIntoDbBoardGameFromAPI() {
         RestTemplate restTemplate = new RestTemplate();
         Root object = restTemplate.getForObject("https://api.boardgameatlas.com/api/search?limit=100&client_id=HxiKNy5EnG", Root.class);
         assert object != null; // TODO
@@ -118,7 +123,7 @@ public class BoardGameServiceImpl implements BoardGameService {
                 .designer(game.getPrimary_designer().getName())
                 .artists(game.getArtists())
                 .build()).toList();
-        return (List<BoardGame>) boardGameRepository.saveAll(boardGameListFromAPI);
+        boardGameRepository.saveAll(boardGameListFromAPI);
     }
 
 
@@ -126,4 +131,26 @@ public class BoardGameServiceImpl implements BoardGameService {
         if (entity.isPresent()) return entity.get();
         else throw new BoardGameNotFoundException(id);
     }
+
+    public Page<BoardGame> findByName(String name, int page, int pageResultLimit) {
+        PageRequest pageRequest = PageRequest.of(page, pageResultLimit);
+        return boardGameRepository.findAllByNameContainsIgnoreCase(name, pageRequest);
+    }
+
+    public Page<BoardGame> findByPublisher(String name, int page, int pageResultLimit) {
+        PageRequest pageRequest = PageRequest.of(page, pageResultLimit);
+        return boardGameRepository.findAllByPublisherContainsIgnoreCase(name, pageRequest);
+    }
+
+    public Page<BoardGame> findByPrice(String minPrice, String maxPrice, int page, int pageResultLimit) {
+        PageRequest pageRequest = PageRequest.of(page, pageResultLimit);
+        return boardGameRepository.findAllByPriceUkBetween(minPrice, maxPrice, pageRequest);
+    }
+
+    @Override
+    public Page<BoardGame> findByAge(int age, int page, int pageResultLimit) {
+        PageRequest pageRequest = PageRequest.of(page, pageResultLimit);
+        return boardGameRepository.findAllByMinAgeAfter(age, pageRequest);
+    }
+
 }
