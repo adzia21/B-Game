@@ -18,4 +18,6 @@ public interface BoardGameRepository extends JpaRepository<BoardGame, Long> {
 
     Page<BoardGame> findAllByMinAgeAfter(int age, Pageable pageable);
 
+    int countById(Long idNumber);
+
 }

@@ -8,6 +8,4 @@ public class BGameApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BGameApplication.class, args);
-    }
-
-}
+}}

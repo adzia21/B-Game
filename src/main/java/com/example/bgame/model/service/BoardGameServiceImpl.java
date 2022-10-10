@@ -2,14 +2,13 @@ package com.example.bgame.model.service;
 
 import com.example.bgame.Utils;
 import com.example.bgame.model.exception.BoardGameNotFoundException;
+import com.example.bgame.model.exception.ExternalApiConnectionException;
 import com.example.bgame.model.external.Root;
 import com.example.bgame.model.internal.BoardGame;
 import com.example.bgame.model.repository.BoardGameRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,22 +33,23 @@ public class BoardGameServiceImpl implements BoardGameService {
         return boardGameRepository.findAll(pageRequest);
     }
 
-    @Override
+    @Override //TODO test
     public BoardGame saveBoardGame(BoardGame boardGame) {
         return boardGameRepository.save(boardGame);
     }
 
     @Override
     public void deleteBoardGame(Long id) {
+        if(boardGameRepository.countById(id) == 0){
+            throw new BoardGameNotFoundException(id);
+        }
         boardGameRepository.deleteById(id);
     }
 
     @Override
     public void updateBoardGame(BoardGame boardGame, Long id) {
         BoardGame boardGameFromDb = getBoardGame(id);
-        if (boardGame.getName() != null) {
-            boardGameFromDb.setName(boardGame.getName());
-        }
+        boardGameFromDb.setName(boardGame.getName());
         if (boardGame.getPriceUk() != null) {
             boardGameFromDb.setPriceUk(boardGame.getPriceUk());
         }
@@ -59,7 +59,6 @@ public class BoardGameServiceImpl implements BoardGameService {
         if (boardGame.getPublishedYear() != 0) {
             boardGameFromDb.setPublishedYear(boardGame.getPublishedYear());
         }
-
         if (boardGame.getMinPlayers() != 0) {
             boardGameFromDb.setMinPlayers(boardGame.getMinPlayers());
         }
@@ -103,7 +102,10 @@ public class BoardGameServiceImpl implements BoardGameService {
     public void saveIntoDbBoardGameFromAPI() {
         RestTemplate restTemplate = new RestTemplate();
         Root object = restTemplate.getForObject("https://api.boardgameatlas.com/api/search?limit=100&client_id=HxiKNy5EnG", Root.class);
-        assert object != null; // TODO
+        if (object == null || object.getGames().isEmpty()) {
+            throw new ExternalApiConnectionException();
+        }
+
         List<BoardGame> boardGameListFromAPI = object.getGames().stream().map(game -> BoardGame.builder()
                 .name(game.getName())
                 .priceUk(game.getPrice_uk())
@@ -126,12 +128,6 @@ public class BoardGameServiceImpl implements BoardGameService {
         boardGameRepository.saveAll(boardGameListFromAPI);
     }
 
-
-    static BoardGame unwrapBoardGame(Optional<BoardGame> entity, Long id) {
-        if (entity.isPresent()) return entity.get();
-        else throw new BoardGameNotFoundException(id);
-    }
-
     public Page<BoardGame> findByName(String name, int page, int pageResultLimit) {
         PageRequest pageRequest = PageRequest.of(page, pageResultLimit);
         return boardGameRepository.findAllByNameContainsIgnoreCase(name, pageRequest);
@@ -151,6 +147,10 @@ public class BoardGameServiceImpl implements BoardGameService {
     public Page<BoardGame> findByAge(int age, int page, int pageResultLimit) {
         PageRequest pageRequest = PageRequest.of(page, pageResultLimit);
         return boardGameRepository.findAllByMinAgeAfter(age, pageRequest);
+    }
+    static BoardGame unwrapBoardGame(Optional<BoardGame> entity, Long id) {
+        if (entity.isPresent()) return entity.get();
+        else throw new BoardGameNotFoundException(id);
     }
 
 }

@@ -1,12 +1,9 @@
 package com.example.bgame.model.internal;
 
-import com.example.bgame.Utils;
-import com.example.bgame.model.external.PrimaryDesigner;
-import com.example.bgame.model.external.PrimaryPublisher;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Builder
@@ -20,6 +17,8 @@ public class BoardGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Name cannot be blank")
+    @NonNull
     private String name;
     private String priceUk;
     private String pricePl;
@@ -42,4 +41,12 @@ public class BoardGame {
     @ElementCollection
     private List<String> artists;
 
+    public void setPricePl(String pricePl) {
+        if (pricePl.isEmpty() || pricePl.isBlank()) {
+            double price = Double.parseDouble(priceUk) * 4.5; //TODO find some info about saving to properties one value (maybe API later)
+            this.pricePl = Double.toString(price);
+        } else {
+            this.pricePl = pricePl;
+        }
+    }
 }
