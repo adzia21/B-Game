@@ -1,4 +1,4 @@
-package com.example.bgame.model.internal;
+package com.example.bgame.model.internal.bgame;
 
 import lombok.*;
 
@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "board_game")
 public class BoardGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

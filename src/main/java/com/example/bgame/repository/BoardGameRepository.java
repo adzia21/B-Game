@@ -1,7 +1,7 @@
-package com.example.bgame.model.repository;
+package com.example.bgame.repository;
 
 
-import com.example.bgame.model.internal.BoardGame;
+import com.example.bgame.model.internal.bgame.BoardGame;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

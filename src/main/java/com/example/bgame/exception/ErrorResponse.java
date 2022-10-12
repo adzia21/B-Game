@@ -1,4 +1,4 @@
-package com.example.bgame.model.exception;
+package com.example.bgame.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

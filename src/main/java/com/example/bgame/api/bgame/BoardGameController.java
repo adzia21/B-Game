@@ -1,8 +1,8 @@
-package com.example.bgame.model.api;
+package com.example.bgame.api.bgame;
 
 
-import com.example.bgame.model.internal.BoardGame;
-import com.example.bgame.model.service.BoardGameService;
+import com.example.bgame.model.internal.bgame.BoardGame;
+import com.example.bgame.service.bgame.BoardGameService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

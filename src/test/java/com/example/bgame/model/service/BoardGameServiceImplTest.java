@@ -1,13 +1,14 @@
 package com.example.bgame.model.service;
 
-import com.example.bgame.model.internal.BoardGame;
+import com.example.bgame.model.internal.bgame.BoardGame;
+import com.example.bgame.service.bgame.BoardGameService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional

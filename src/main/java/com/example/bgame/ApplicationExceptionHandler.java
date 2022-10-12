@@ -1,8 +1,8 @@
 package com.example.bgame;
 
-import com.example.bgame.model.exception.BoardGameNotFoundException;
-import com.example.bgame.model.exception.ErrorResponse;
-import com.example.bgame.model.exception.ExternalApiConnectionException;
+import com.example.bgame.exception.BoardGameNotFoundException;
+import com.example.bgame.exception.ErrorResponse;
+import com.example.bgame.exception.ExternalApiConnectionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

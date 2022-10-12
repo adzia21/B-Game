@@ -1,11 +1,11 @@
-package com.example.bgame.model.service;
+package com.example.bgame.service.bgame;
 
 import com.example.bgame.Utils;
-import com.example.bgame.model.exception.BoardGameNotFoundException;
-import com.example.bgame.model.exception.ExternalApiConnectionException;
+import com.example.bgame.exception.BoardGameNotFoundException;
+import com.example.bgame.exception.ExternalApiConnectionException;
 import com.example.bgame.model.external.Root;
-import com.example.bgame.model.internal.BoardGame;
-import com.example.bgame.model.repository.BoardGameRepository;
+import com.example.bgame.model.internal.bgame.BoardGame;
+import com.example.bgame.repository.BoardGameRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

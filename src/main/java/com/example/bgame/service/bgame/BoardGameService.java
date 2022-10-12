@@ -1,8 +1,7 @@
-package com.example.bgame.model.service;
+package com.example.bgame.service.bgame;
 
-import com.example.bgame.model.internal.BoardGame;
+import com.example.bgame.model.internal.bgame.BoardGame;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 public interface BoardGameService {
     BoardGame getBoardGame(Long id);

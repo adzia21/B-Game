@@ -1,4 +1,4 @@
-package com.example.bgame.model.exception;
+package com.example.bgame.exception;
 
 public class BoardGameNotFoundException extends RuntimeException {
     public BoardGameNotFoundException(Long id) {
