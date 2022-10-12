@@ -16,7 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/boardGame")
 public class BoardGameController {
-    BoardGameService boardGameService;
+    private BoardGameService boardGameService;
 
     @GetMapping("/{id}")
     public ResponseEntity<BoardGame> getBoardGame(@PathVariable Long id) {

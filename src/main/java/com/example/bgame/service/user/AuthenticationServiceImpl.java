@@ -30,11 +30,11 @@ import static com.example.bgame.model.internal.user.ERole.USER;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    AuthenticationManager authenticationManager;
-    UserRepository userRepository;
-    RoleRepository roleRepository;
-    PasswordEncoder encoder;
-    JwtUtils jwtUtils;
+    private AuthenticationManager authenticationManager;
+    private UserRepository userRepository;
+    private RoleRepository roleRepository;
+    private PasswordEncoder encoder;
+    private JwtUtils jwtUtils;
 
     @Override
     public JwtResponse authenticateAndReturnJwt(String username, String password) {

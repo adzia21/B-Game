@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 @AllArgsConstructor
 public class AuthController {
-    AuthenticationService authenticationService;
+    private AuthenticationService authenticationService;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

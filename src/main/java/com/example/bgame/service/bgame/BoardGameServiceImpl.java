@@ -19,7 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BoardGameServiceImpl implements BoardGameService {
 
-    BoardGameRepository boardGameRepository;
+    private BoardGameRepository boardGameRepository;
 
     @Override
     public BoardGame getBoardGame(Long id) {
