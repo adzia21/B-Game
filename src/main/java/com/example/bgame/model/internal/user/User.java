@@ -23,7 +23,6 @@ public class User {
     @JsonIgnore
     private String password;
     private String email;
-    private String phone;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -31,11 +30,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_roleId"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String name, String password, String email, String phone, Set<Role> roles) {
+    public User(String name, String password, String email) {
         this.name = name;
         this.password = password;
         this.email = email;
-        this.phone = phone;
-        this.roles = roles;
     }
+
+
 }
