@@ -33,7 +33,7 @@ public class BoardGameServiceImpl implements BoardGameService {
         return boardGameRepository.findAll(pageRequest);
     }
 
-    @Override //TODO test
+    @Override
     public BoardGame saveBoardGame(BoardGame boardGame) {
         return boardGameRepository.save(boardGame);
     }

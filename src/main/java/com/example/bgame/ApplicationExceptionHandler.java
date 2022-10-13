@@ -13,7 +13,7 @@ import java.util.Collections;
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({BoardGameNotFoundException.class, RoleNotFoundException.class})
+    @ExceptionHandler({BoardGameNotFoundException.class, RoleNotFoundException.class, BoardGameListNotFoundException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex){
         ErrorResponse error = new ErrorResponse(Collections.singletonList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
