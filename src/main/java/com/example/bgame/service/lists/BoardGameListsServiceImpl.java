@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -32,11 +31,14 @@ public class BoardGameListsServiceImpl implements BoardGameListsService {
         return loggedUser.getId();
     }
 
-    private static BoardGameList unwrapBoardGameList(Optional<BoardGameList> entity, Long id) {
-        if (entity.isPresent()) return entity.get();
-        else throw new BoardGameListNotFoundException(id);
+    @Override
+    public List<BoardGameList> getBoardGameListsByLoggedUser() {
+        Long loggedUserId = getLoggedUserId();
+        User user = userRepository.findById(loggedUserId).orElseThrow(() -> new UserNotFoundException(loggedUserId));
+        return boardGameListRepository.findBoardGameListsByUser(user);
     }
 
+    //LISTS
     @Override
     public BoardGameList saveBoardGameList(EBoardGameNamesList name) {
         Long loggedUserId = getLoggedUserId();
@@ -49,14 +51,12 @@ public class BoardGameListsServiceImpl implements BoardGameListsService {
         return boardGameListRepository.save(boardGameList);
     }
 
+    //INSIDE LISTS
 
-    //TODO
-
-    @Override
-    public List<BoardGameList> getBoardGameListsByLoggedUser() {
-        Long loggedUserId = getLoggedUserId();
-        User user = userRepository.findById(loggedUserId).orElseThrow(() -> new UserNotFoundException(loggedUserId));
-        return boardGameListRepository.findBoardGameListsByUser(user);
+    public void deleteBoardGameList(Long idListToDelete) {
+        //TODO user validation
+        BoardGameList boardGameList = boardGameListRepository.findById(idListToDelete).orElseThrow(() -> new BoardGameListNotFoundException(idListToDelete));
+        boardGameListRepository.delete(boardGameList);
     }
 
     @Override
@@ -68,19 +68,15 @@ public class BoardGameListsServiceImpl implements BoardGameListsService {
     }
 
     @Override
-    public void deleteBoardGameFromList(Long id) {
-
-    }
-
-    public void deleteBoardGameList(Long idListToDelete) {
-        //TODO user validation
-        BoardGameList boardGameList = boardGameListRepository.findById(idListToDelete).orElseThrow(() -> new BoardGameListNotFoundException(idListToDelete));
-        boardGameListRepository.delete(boardGameList);
+    public BoardGameList getBoardGameListById(Long id) {
+        return boardGameListRepository.findById(id).orElseThrow(() -> new BoardGameListNotFoundException(id));
     }
 
     @Override
-    public BoardGameList getBoardGameListById(Long id) {
-        return null;
+    public void deleteBoardGameFromList(Long boardGameId, Long boardGameListId) {
+        BoardGame boardGameFromRepo = boardGameRepository.findById(boardGameId).orElseThrow(() -> new BoardGameNotFoundException(boardGameId));
+        BoardGameList boardGameList = getBoardGameListById(boardGameListId);
+        boardGameList.getBoardGameList().remove(boardGameFromRepo);
+        boardGameListRepository.save(boardGameList);
     }
-
 }

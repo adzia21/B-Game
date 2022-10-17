@@ -15,19 +15,19 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 public class BoardGameList {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    private EBoardGameNamesList namesList;
-    @JoinTable(name = "boardGameList_boardGame",
-            joinColumns = @JoinColumn(name = "boardGameList_id"),
-            inverseJoinColumns = @JoinColumn(name = "boardGame_id"))
-
-    @ManyToMany
-    private List<BoardGame> boardGameList;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+    private EBoardGameNamesList namesList;
+    @ManyToMany
+    @JoinTable(name = "boardGameList_boardGame",
+            joinColumns = @JoinColumn(name = "boardGameList_id"),
+            inverseJoinColumns = @JoinColumn(name = "boardGame_id"))
+    private List<BoardGame> boardGameList;
 
     public BoardGameList(EBoardGameNamesList namesList) {
         this.namesList = namesList;

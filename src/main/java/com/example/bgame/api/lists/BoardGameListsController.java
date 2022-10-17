@@ -18,14 +18,7 @@ import java.util.List;
 public class BoardGameListsController {
     private BoardGameListsService boardGameListsService;
 
-    //DONE
-
-    @PostMapping("/create")
-    public ResponseEntity<BoardGameListWithoutUserResponse> createBoardGameList(@Valid @RequestParam("name") EBoardGameNamesList name) {
-        BoardGameListWithoutUserResponse response = BoardGameListWithoutUserResponse.from(boardGameListsService.saveBoardGameList(name));
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
+    //LISTS
     @GetMapping("")
     public ResponseEntity<List<BoardGameListWithoutUserResponse>> getBoardGameListByLoggedUser() {
         List<BoardGameList> boardGameListsByLoggedUser = boardGameListsService.getBoardGameListsByLoggedUser();
@@ -34,17 +27,36 @@ public class BoardGameListsController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<BoardGameListWithoutUserResponse> createBoardGameList(@Valid @RequestParam("name") EBoardGameNamesList name) {
+        BoardGameListWithoutUserResponse response = BoardGameListWithoutUserResponse.from(boardGameListsService.saveBoardGameList(name));
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteBoardGameListByLoggedUser(@PathVariable Long id) {
         boardGameListsService.deleteBoardGameList(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    //TODO
+    //INSIDE LISTS
 
-    @GetMapping("{boardGameListId}/add/{boardGameId}")
+    @GetMapping("/{id}")
+    public ResponseEntity<BoardGameListWithoutUserResponse> getBoardGamesFromList(@PathVariable Long id) {
+        BoardGameList boardGameListById = boardGameListsService.getBoardGameListById(id);
+        BoardGameListWithoutUserResponse response = BoardGameListWithoutUserResponse.from(boardGameListById);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/{boardGameListId}/add/{boardGameId}")
     public ResponseEntity<BoardGameList> saveBoardGameToList(@PathVariable Long boardGameListId, @PathVariable Long boardGameId) {
         return new ResponseEntity<>(boardGameListsService.addBoardGameToList(boardGameId, boardGameListId), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{boardGameListId}/delete/{boardGameId}")
+    public ResponseEntity<Object> deleteBoardGameFromList(@PathVariable Long boardGameListId, @PathVariable Long boardGameId) {
+        boardGameListsService.deleteBoardGameFromList(boardGameId, boardGameListId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
