@@ -6,14 +6,14 @@ import com.example.bgame.model.internal.lists.EBoardGameNamesList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
 public class BoardGameListWithoutUserResponse {
     private Long id;
     private EBoardGameNamesList namesList;
-    private List<BoardGame> boardGameList;
+    private Set<BoardGame> boardGameList;
 
     public static BoardGameListWithoutUserResponse from(BoardGameList boardGameList) {
         return new BoardGameListWithoutUserResponse(

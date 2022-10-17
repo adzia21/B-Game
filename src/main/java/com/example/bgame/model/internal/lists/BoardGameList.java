@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -27,10 +27,10 @@ public class BoardGameList {
     @JoinTable(name = "boardGameList_boardGame",
             joinColumns = @JoinColumn(name = "boardGameList_id"),
             inverseJoinColumns = @JoinColumn(name = "boardGame_id"))
-    private List<BoardGame> boardGameList;
+    private Set<BoardGame> boardGameList;
 
     public BoardGameList(EBoardGameNamesList namesList) {
         this.namesList = namesList;
-        this.boardGameList = new ArrayList<>();
+        this.boardGameList = new HashSet<>();
     }
 }

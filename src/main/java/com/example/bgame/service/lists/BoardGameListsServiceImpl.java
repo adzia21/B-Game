@@ -26,11 +26,7 @@ public class BoardGameListsServiceImpl implements BoardGameListsService {
     private BoardGameRepository boardGameRepository;
     private UserRepository userRepository;
 
-    private static Long getLoggedUserId() {
-        UserDetailsImpl loggedUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return loggedUser.getId();
-    }
-
+    //LISTS
     @Override
     public List<BoardGameList> getBoardGameListsByLoggedUser() {
         Long loggedUserId = getLoggedUserId();
@@ -38,7 +34,6 @@ public class BoardGameListsServiceImpl implements BoardGameListsService {
         return boardGameListRepository.findBoardGameListsByUser(user);
     }
 
-    //LISTS
     @Override
     public BoardGameList saveBoardGameList(EBoardGameNamesList name) {
         Long loggedUserId = getLoggedUserId();
@@ -51,12 +46,16 @@ public class BoardGameListsServiceImpl implements BoardGameListsService {
         return boardGameListRepository.save(boardGameList);
     }
 
-    //INSIDE LISTS
-
     public void deleteBoardGameList(Long idListToDelete) {
         //TODO user validation
         BoardGameList boardGameList = boardGameListRepository.findById(idListToDelete).orElseThrow(() -> new BoardGameListNotFoundException(idListToDelete));
         boardGameListRepository.delete(boardGameList);
+    }
+
+    //INSIDE LISTS
+    @Override
+    public BoardGameList getBoardGameListById(Long id) {
+        return boardGameListRepository.findById(id).orElseThrow(() -> new BoardGameListNotFoundException(id));
     }
 
     @Override
@@ -68,15 +67,15 @@ public class BoardGameListsServiceImpl implements BoardGameListsService {
     }
 
     @Override
-    public BoardGameList getBoardGameListById(Long id) {
-        return boardGameListRepository.findById(id).orElseThrow(() -> new BoardGameListNotFoundException(id));
-    }
-
-    @Override
     public void deleteBoardGameFromList(Long boardGameId, Long boardGameListId) {
         BoardGame boardGameFromRepo = boardGameRepository.findById(boardGameId).orElseThrow(() -> new BoardGameNotFoundException(boardGameId));
         BoardGameList boardGameList = getBoardGameListById(boardGameListId);
         boardGameList.getBoardGameList().remove(boardGameFromRepo);
         boardGameListRepository.save(boardGameList);
+    }
+
+    private static Long getLoggedUserId() {
+        UserDetailsImpl loggedUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return loggedUser.getId();
     }
 }
