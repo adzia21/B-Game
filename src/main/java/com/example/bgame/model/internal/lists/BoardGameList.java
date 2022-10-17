@@ -1,6 +1,7 @@
 package com.example.bgame.model.internal.lists;
 
 import com.example.bgame.model.internal.bgame.BoardGame;
+import com.example.bgame.model.internal.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,8 +22,12 @@ public class BoardGameList {
     @JoinTable(name = "boardGameList_boardGame",
             joinColumns = @JoinColumn(name = "boardGameList_id"),
             inverseJoinColumns = @JoinColumn(name = "boardGame_id"))
+
     @ManyToMany
     private List<BoardGame> boardGameList;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
     public BoardGameList(EBoardGameNamesList namesList) {
         this.namesList = namesList;

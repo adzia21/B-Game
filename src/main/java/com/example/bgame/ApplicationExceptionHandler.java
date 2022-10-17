@@ -13,7 +13,7 @@ import java.util.Collections;
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({BoardGameNotFoundException.class, RoleNotFoundException.class, BoardGameListNotFoundException.class})
+    @ExceptionHandler({BoardGameNotFoundException.class, RoleNotFoundException.class, BoardGameListNotFoundException.class, UserNotFoundException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex){
         ErrorResponse error = new ErrorResponse(Collections.singletonList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
@@ -25,7 +25,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(error, HttpStatus.BAD_GATEWAY);
     }
 
-    @ExceptionHandler({UsernameTakenException.class, EmailAlreadyTakenException.class})
+    @ExceptionHandler({UsernameTakenException.class, EmailAlreadyTakenException.class, BoardGameListAlreadyExistException.class})
     public ResponseEntity<Object> handleEntityAlreadyTaken(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
