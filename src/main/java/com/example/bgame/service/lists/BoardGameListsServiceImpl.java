@@ -1,9 +1,6 @@
 package com.example.bgame.service.lists;
 
-import com.example.bgame.exception.BoardGameListAlreadyExistException;
-import com.example.bgame.exception.BoardGameListNotFoundException;
-import com.example.bgame.exception.BoardGameNotFoundException;
-import com.example.bgame.exception.UserNotFoundException;
+import com.example.bgame.exception.*;
 import com.example.bgame.model.internal.bgame.BoardGame;
 import com.example.bgame.model.internal.lists.BoardGameList;
 import com.example.bgame.model.internal.lists.EBoardGameNamesList;
@@ -47,29 +44,56 @@ class BoardGameListsServiceImpl implements BoardGameListsService {
     }
 
     public void deleteBoardGameList(Long idListToDelete) {
-        //TODO user validation
+        Long loggedUserId = getLoggedUserId();
+        User user = userRepository.findById(loggedUserId).orElseThrow(() -> new UserNotFoundException(loggedUserId));
         BoardGameList boardGameList = boardGameListRepository.findById(idListToDelete).orElseThrow(() -> new BoardGameListNotFoundException(idListToDelete));
+        if (boardGameList.getUser() != user) {
+            throw new AccessNotAllowedException(boardGameList.getUser().getId());
+        }
         boardGameListRepository.delete(boardGameList);
     }
 
     //INSIDE LISTS
     @Override
     public BoardGameList getBoardGameListById(Long id) {
-        return boardGameListRepository.findById(id).orElseThrow(() -> new BoardGameListNotFoundException(id));
+        Long loggedUserId = getLoggedUserId();
+        User user = userRepository.findById(loggedUserId).orElseThrow(() -> new UserNotFoundException(loggedUserId));
+        BoardGameList boardGameList = boardGameListRepository.findById(id).orElseThrow(() -> new BoardGameListNotFoundException(id));
+        if (boardGameList.getUser() != user) {
+            throw new AccessNotAllowedException(boardGameList.getUser().getId());
+        }
+        return boardGameList;
     }
 
     @Override
     public BoardGameList addBoardGameToList(Long boardGameId, Long boardGameListId) {
         BoardGame boardGameFromRepo = boardGameRepository.findById(boardGameId).orElseThrow(() -> new BoardGameNotFoundException(boardGameId));
         BoardGameList boardGameList = getBoardGameListById(boardGameListId);
+
+        Long loggedUserId = getLoggedUserId();
+        User user = userRepository.findById(loggedUserId).orElseThrow(() -> new UserNotFoundException(loggedUserId));
+
+        if (boardGameList.getUser() != user) {
+            throw new AccessNotAllowedException(boardGameList.getUser().getId());
+        }
+
         boardGameList.getBoardGameList().add(boardGameFromRepo);
         return boardGameListRepository.save(boardGameList);
+
     }
 
     @Override
     public void deleteBoardGameFromList(Long boardGameId, Long boardGameListId) {
+        Long loggedUserId = getLoggedUserId();
+        User user = userRepository.findById(loggedUserId).orElseThrow(() -> new UserNotFoundException(loggedUserId));
+
         BoardGame boardGameFromRepo = boardGameRepository.findById(boardGameId).orElseThrow(() -> new BoardGameNotFoundException(boardGameId));
         BoardGameList boardGameList = getBoardGameListById(boardGameListId);
+
+        if (boardGameList.getUser() != user) {
+            throw new AccessNotAllowedException(boardGameList.getUser().getId());
+        }
+
         boardGameList.getBoardGameList().remove(boardGameFromRepo);
         boardGameListRepository.save(boardGameList);
     }

@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
@@ -14,8 +14,6 @@ public class UserProfileInfoRequest {
 
     private String description;
 
-    private List<EBoardGameTypes> boardGameTypes;
+    private Set<EBoardGameTypes> boardGameTypes;
     //TODO PHOTOS
-
-
 }

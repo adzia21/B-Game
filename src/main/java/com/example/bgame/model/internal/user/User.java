@@ -10,7 +10,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -38,7 +37,7 @@ public class User {
     private String description;
 
     @ElementCollection
-    private List<EBoardGameTypes> boardGameTypes;
+    private Set<EBoardGameTypes> boardGameTypes;
 
     public User(String name, String password, String email) {
         this.name = name;
