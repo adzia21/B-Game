@@ -54,8 +54,6 @@ public class SpringSecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/admin/**")
                 .hasAnyRole("ADMIN")
-                .antMatchers("/user/**")
-                .hasAnyRole("USER", "ADMIN")
                 .antMatchers("/auth/login/**")
                 .anonymous()
                 .antMatchers("/auth/register/**")

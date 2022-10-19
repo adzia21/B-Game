@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class BoardGameListsServiceImpl implements BoardGameListsService {
+class BoardGameListsServiceImpl implements BoardGameListsService {
 
     private BoardGameListRepository boardGameListRepository;
     private BoardGameRepository boardGameRepository;

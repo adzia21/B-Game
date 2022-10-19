@@ -28,7 +28,7 @@ import static com.example.bgame.model.internal.user.ERole.USER;
 
 @AllArgsConstructor
 @Service
-public class AuthenticationServiceImpl implements AuthenticationService {
+class AuthenticationServiceImpl implements AuthenticationService {
 
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;

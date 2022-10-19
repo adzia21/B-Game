@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class BoardGameServiceImpl implements BoardGameService {
+class BoardGameServiceImpl implements BoardGameService {
 
     private BoardGameRepository boardGameRepository;
 
