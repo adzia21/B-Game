@@ -20,6 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min = 10, max = 60)
     @NonNull
     private String name;
     @JsonIgnore

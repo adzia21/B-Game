@@ -13,7 +13,7 @@ import java.util.Collections;
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({BoardGameNotFoundException.class, RoleNotFoundException.class, BoardGameListNotFoundException.class, UserNotFoundException.class})
+    @ExceptionHandler({BoardGameNotFoundException.class, RoleNotFoundException.class, BoardGameListNotFoundException.class, UserNotFoundException.class, SavedGameNotFoundException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex){
         ErrorResponse error = new ErrorResponse(Collections.singletonList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
@@ -31,7 +31,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler({AccessNotAllowedException.class})
+    @ExceptionHandler({AccessNotAllowedException.class, CannotDeleteSavedGameException.class})
     public ResponseEntity<Object> handleAccessNotAllowed(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
