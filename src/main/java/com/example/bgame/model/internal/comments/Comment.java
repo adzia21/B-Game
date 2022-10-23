@@ -1,17 +1,15 @@
 package com.example.bgame.model.internal.comments;
 
+import com.example.bgame.model.internal.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
+@Builder
 @Entity
 @Getter
 @Setter
@@ -21,8 +19,18 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    private String name;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User creator;
+    @CreatedDate
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date date;
+    @Column(columnDefinition = "TEXT")
+    @Size(min=10, max = 1600)
     private String content;
+    private Long superiorCommentId;
+
+    public Comment(User creator, String content) {
+        this.creator = creator;
+        this.content = content;
+    }
 }

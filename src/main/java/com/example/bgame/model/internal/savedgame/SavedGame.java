@@ -35,7 +35,7 @@ public class SavedGame {
     @Size(min = 10, max = 600)
     private String description;
 
-    @ManyToMany //TODO
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> players;
 
     @ManyToOne
@@ -48,7 +48,7 @@ public class SavedGame {
     @JoinColumn(name = "board_game_id")
     private BoardGame boardGame;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "comments_to_description",
             joinColumns = @JoinColumn(name = "comments"),
             inverseJoinColumns = @JoinColumn(name = "description"))

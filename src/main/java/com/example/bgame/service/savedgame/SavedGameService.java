@@ -7,11 +7,15 @@ import java.util.Date;
 import java.util.List;
 
 public interface SavedGameService {
-    List<SavedGame> getSavedGamesById(Long id);
-    List<SavedGame> getSavedGamesByCreationDate(Date date);
+    List<SavedGame> getSavedGamesById(Long id); //TODO
+    List<SavedGame> getSavedGamesByCreationDate(Date date); //TODO
     SavedGame save(SavedGameRequest savedGameRequest);
 
     SavedGame findById(Long id);
+    SavedGame addUserToGame(Long savedGameId, List<Long> userIds);
 
-    void delete(Long savedGameId);
+    List<SavedGame> findAllByLoggedUser();
+    void delete(Long SavedGameId);
+
+    void addComment(Long savedGameId, String description, Long commentId);
 }
