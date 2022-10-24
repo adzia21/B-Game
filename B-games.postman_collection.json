@@ -1,0 +1,766 @@
+{
+	"info": {
+		"_postman_id": "80efe3f4-73d1-42b2-ac41-3e74697f90ec",
+		"name": "B-games",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Board Game",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.boardgameatlas.com/api/search?order_by=rank&ascending=false&client_id=HxiKNy5EnG",
+							"protocol": "https",
+							"host": [
+								"api",
+								"boardgameatlas",
+								"com"
+							],
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "order_by",
+									"value": "rank"
+								},
+								{
+									"key": "ascending",
+									"value": "false"
+								},
+								{
+									"key": "client_id",
+									"value": "HxiKNy5EnG"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Board Game",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Catan3\",\r\n    \"priceUk\": \"60.52\",\r\n    \"pricePl\": \"60.52\",\r\n    \"publishedYear\": \"2005\",\r\n    \"minPlayers\": \"2\",\r\n    \"maxPlayers\": \"4\",\r\n    \"minPlaytime\": \"40\",\r\n    \"maxPlaytime\": \"60\",\r\n    \"playtime\": \"40-60\",\r\n    \"minAge\": \"8\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\r\n    \"commentary\": \"It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\",\r\n    \"faq\": \"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.\",\r\n    \"imageUrl\": \"https://www.lipsum.com/\",\r\n    \"publisher\": \"Good Game\",\r\n    \"designer\": \"Ron Weasley\",\r\n    \"artists\": [\"Hermiona\", \"Draco\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/boardGame",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Board Game",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/boardGame/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board Games",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/boardGame/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board Game",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/boardGame/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Board Game",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Szakalaka2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/boardGame/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board Games From API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/boardGame/fromAPI",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"fromAPI"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board Game By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/boardGame/name?name=a&page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board Game By Publisher",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/boardGame/publisher?publisher=an&page=0&limit=90",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"publisher"
+							],
+							"query": [
+								{
+									"key": "publisher",
+									"value": "an"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "90"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board Game By Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/boardGame/price?minPrice=45&maxPrice=50&page=0&limit=90",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"boardGame",
+								"price"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "45"
+								},
+								{
+									"key": "maxPrice",
+									"value": "50"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "90"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board Game By Age",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"adzia4\",\r\n    \"password\": \"adzia14\",\r\n    \"email\": \"adzia@adzia2.pl\",\r\n    \"roles\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"adzia4\",\r\n    \"password\": \"adzia14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "access User’s content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080api/test/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080api",
+							"path": [
+								"test",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "access Admin’s content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080api/test/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080api",
+							"path": [
+								"test",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lists",
+			"item": [
+				{
+					"name": "Lists",
+					"item": [
+						{
+							"name": "Create List of Board Games",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZHppYTQ0IiwiaWF0IjoxNjY2MDAxODQ4LCJleHAiOjE2NjYwODgyNDh9.G0R2ifQq-oxnyHjpx8dbUe2Htwywcx2EwLMKX-z3IYbgCau_1flA3su3vh9O-gvcdVJeplWkbRADJBrp6YgxGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/boardgamelists/create?name=OWNED",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"boardgamelists",
+										"create"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "OWNED"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Board Game List By id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZHppYTQ0IiwiaWF0IjoxNjY2MDAxODQ4LCJleHAiOjE2NjYwODgyNDh9.G0R2ifQq-oxnyHjpx8dbUe2Htwywcx2EwLMKX-z3IYbgCau_1flA3su3vh9O-gvcdVJeplWkbRADJBrp6YgxGQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/boardgamelists/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"boardgamelists",
+										"get"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Board Game List",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/boardgamelists/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"boardgamelists",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Inside List",
+					"item": [
+						{
+							"name": "Add Board Game to List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZHppYTQ0IiwiaWF0IjoxNjY1NjcxNzk4LCJleHAiOjE2NjU3NTgxOTh9.1Kf9CKy9TS7ypGPTRi_N2fLvvmuGAHLaQFw8Of7Kcr5tvHTYMeh87zcEyjC-eimaLhpqwaAqTpkbFb9OgUS7Rg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/boardgamelists/2/add/30",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"boardgamelists",
+										"2",
+										"add",
+										"30"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Board Games From List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/boardgamelists/2/add/30",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"boardgamelists",
+										"2",
+										"add",
+										"30"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Board Game From List",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/boardgamelists/2/delete/30",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"boardgamelists",
+										"2",
+										"delete",
+										"30"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User Details",
+			"item": [
+				{
+					"name": "Change Description or Fav Game Types",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Loged User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SavedBoardGames",
+			"item": [
+				{
+					"name": "Lists",
+					"item": [
+						{
+							"name": "Create Saved Board Game",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/user/details/loggedUser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"details",
+										"loggedUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Saved Board Game By Id",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Saved Board Game By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/savedGames/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"savedGames",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "InsideLists",
+					"item": [
+						{
+							"name": "Add Player To Saved Board Game",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Find all Saved Games By  Logged User",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Add Comment To Saved Board",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZHppayIsImlhdCI6MTY2NjQ4NDIyNiwiZXhwIjoxNjY2NTcwNjI2fQ.E1HRgv9PzfXp4Crla3ZDP0MsqjEP3ex5NpQKZYV1lXRK6AjrCvkP48bFl0soKhaQXePynNjieWGjbneyQZDs2Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Lorem ipsum czy coś.\",\r\n    \"superiorCommentId\": \"null\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/comment/savedGames/12",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"comment",
+										"savedGames",
+										"12"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZHppYTQ0IiwiaWF0IjoxNjY2MDAxODQ4LCJleHAiOjE2NjYwODgyNDh9.G0R2ifQq-oxnyHjpx8dbUe2Htwywcx2EwLMKX-z3IYbgCau_1flA3su3vh9O-gvcdVJeplWkbRADJBrp6YgxGQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

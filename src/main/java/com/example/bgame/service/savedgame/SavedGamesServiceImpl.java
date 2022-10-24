@@ -1,5 +1,6 @@
 package com.example.bgame.service.savedgame;
 
+import com.example.bgame.exception.AccessNotAllowedException;
 import com.example.bgame.exception.BoardGameNotFoundException;
 import com.example.bgame.exception.SavedGameNotFoundException;
 import com.example.bgame.exception.UserNotFoundException;
@@ -49,7 +50,12 @@ public class SavedGamesServiceImpl implements SavedGameService{
 
     @Override
     public SavedGame findById(Long id) {
-        return savedGameRepository.findById(id).orElseThrow(() -> new SavedGameNotFoundException(id));
+        Long loggedUserId = getLoggedUserId();
+        SavedGame savedGame = savedGameRepository.findById(id).orElseThrow(() -> new SavedGameNotFoundException(id));
+        if(!savedGame.getCreator().getId().equals(loggedUserId) || savedGame.getPlayers().stream().noneMatch((p->p.getId().equals(loggedUserId)))){
+            throw new AccessNotAllowedException(loggedUserId);
+        }
+        return savedGame;
     }
 
     @Override
